@@ -8,8 +8,8 @@ class InitializeTransactionRequest {
   final int? invoiceLimit;
   final List<String>? channels;
   final String? splitCode;
-  final String? subaccount;
-  final int? transactionCharge;
+  final String? subAccount;
+  final num? transactionCharge;
   final String? bearer;
 
   InitializeTransactionRequest({
@@ -22,7 +22,7 @@ class InitializeTransactionRequest {
     this.invoiceLimit,
     this.channels,
     this.splitCode,
-    this.subaccount,
+    this.subAccount,
     this.transactionCharge,
     this.bearer,
   });
@@ -37,7 +37,7 @@ class InitializeTransactionRequest {
     invoiceLimit: json["invoice_limit"],
     channels: json["channels"],
     splitCode: json["split_code"],
-    subaccount: json["subaccount"],
+    subAccount: json["subaccount"],
     transactionCharge: json["transaction_charge"],
     bearer: json["bearer"],
   );
@@ -52,7 +52,7 @@ class InitializeTransactionRequest {
     if(invoiceLimit != null)  "invoice_limit": invoiceLimit,
     if(channels != null)  "channels": channels,
     if(splitCode != null) "split_code": splitCode,
-    if(subaccount != null) "subaccount": subaccount,
+    if(subAccount != null) "subaccount": subAccount,
     if(transactionCharge != null) "transaction_charge": transactionCharge,
     if(bearer != null)  "bearer": bearer,
   };

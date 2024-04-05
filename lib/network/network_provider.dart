@@ -20,29 +20,31 @@ class NetworkProvider {
       {required String path,
       required RequestMethod method,
       dynamic body = const {},
-      Map<String, dynamic> queryParams = const {}}) async {
+      Map<String, dynamic> queryParams = const {},
+      Map<String, dynamic> headers = const {}
+      }) async {
     Response? response;
     try {
       switch (method) {
         case RequestMethod.get:
           response =
-              await _getDioInstance().get(path, queryParameters: queryParams,);
+              await _getDioInstance().get(path, queryParameters: queryParams,options: Options(headers: headers,));
           break;
         case RequestMethod.post:
           response = await _getDioInstance()
-              .post(path, data: body, queryParameters: queryParams);
+              .post(path, data: body, queryParameters: queryParams,options: Options(headers: headers,));
           break;
         case RequestMethod.patch:
           response = await _getDioInstance()
-              .patch(path, data: body, queryParameters: queryParams);
+              .patch(path, data: body, queryParameters: queryParams,options: Options(headers: headers,));
           break;
         case RequestMethod.put:
           response = await _getDioInstance()
-              .put(path, data: body, queryParameters: queryParams);
+              .put(path, data: body, queryParameters: queryParams,options: Options(headers: headers,));
           break;
         case RequestMethod.delete:
           response = await _getDioInstance()
-              .delete(path, data: body, queryParameters: queryParams);
+              .delete(path, data: body, queryParameters: queryParams,options: Options(headers: headers,));
           break;
       }
 
