@@ -8,6 +8,8 @@ import 'package:webview_flutter/webview_flutter.dart';
 import 'models/initialize_transaction_resposne.dart';
 
 class PaymentPage extends StatefulWidget {
+
+
   ///YOUR_SECRET_KEY
   final String secretKey;
 
@@ -40,7 +42,7 @@ class PaymentPage extends StatefulWidget {
   final num? transactionCharge;
 
   ///The split code of the transaction split. e.g. SPL_98WF13Eb3w
-  final String splitCode;
+  final String? splitCode;
 
   ///The code for the subaccount that owns the payment. e.g. ACCT_8f4s1eq7ml6rlzj
   final String? subAccount;
@@ -48,9 +50,14 @@ class PaymentPage extends StatefulWidget {
   ///Number of times to charge customer during subscription to plan
   final int? invoiceLimit;
 
+  /// callback for when a transaction is completed
   final Function? onTransactionCompleted;
 
+  /// callback for when a transaction is cancelled
   final Function? onTransactionCancelled;
+
+  /// BuildContext context for navigation
+  final BuildContext context ;
 
   const PaymentPage({
     super.key,
@@ -64,11 +71,12 @@ class PaymentPage extends StatefulWidget {
     this.plan,
     this.bearer,
     this.transactionCharge,
-    required this.splitCode,
+    this.splitCode,
     this.subAccount,
     this.invoiceLimit,
     this.onTransactionCompleted,
     this.onTransactionCancelled,
+    required this.context
   });
 
   @override
@@ -182,13 +190,13 @@ class _PaymentPageState extends State<PaymentPage> {
         url.contains(widget.callbackUrl ?? '') ||
         url == "https://hello.pstk.xyz/callback") {
       bool transactionSuccessful = await _checkTransactionStatusSuccessful(widget.reference ?? '');
-      if (mounted) {
+      if (widget.context.mounted) {
         if (transactionSuccessful) {
           widget.onTransactionCompleted?.call();
-          Navigator.of(context).pop();
+          Navigator.of(widget.context).pop();
         } else {
           widget.onTransactionCancelled?.call();
-          Navigator.of(context).pop();
+          Navigator.of(widget.context).pop();
         }
       }
     }
