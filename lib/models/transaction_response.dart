@@ -21,7 +21,7 @@ class TransactionResponse {
         channel: json["channel"],
         currency: json["currency"],
         gatewayResponse: json["gateway_response"],
-        authorization: Authorization.fromJson(json["authorization"]),
+        authorization: json["authorization"] != null ? Authorization.fromJson(json["authorization"]) : null,
       );
 
   Map<String, dynamic> toJson() => {
