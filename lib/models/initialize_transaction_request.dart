@@ -28,32 +28,32 @@ class InitializeTransactionRequest {
   });
 
   factory InitializeTransactionRequest.fromJson(Map<String, dynamic> json) => InitializeTransactionRequest(
-    email: json["email"],
-    amount: json["amount"],
-    reference: json["reference"],
-    currency: json["currency"],
-    callbackUrl: json["callback_url"],
-    plan: json["plan"],
-    invoiceLimit: json["invoice_limit"],
-    channels: json["channels"],
-    splitCode: json["split_code"],
-    subAccount: json["subaccount"],
-    transactionCharge: json["transaction_charge"],
-    bearer: json["bearer"],
-  );
+        email: json["email"],
+        amount: json["amount"],
+        reference: json["reference"],
+        currency: json["currency"],
+        callbackUrl: json["callback_url"],
+        plan: json["plan"],
+        invoiceLimit: json["invoice_limit"],
+        channels: json["channels"],
+        splitCode: json["split_code"],
+        subAccount: json["subaccount"],
+        transactionCharge: json["transaction_charge"],
+        bearer: json["bearer"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "email": email,
-    "amount": amount,
-   if(reference != null) "reference": reference,
-    if(currency != null)  "currency": currency,
-    if(callbackUrl != null)  "callback_url": callbackUrl,
-    if(plan != null)  "plan": plan,
-    if(invoiceLimit != null)  "invoice_limit": invoiceLimit,
-    if(channels != null)  "channels": channels,
-    if(splitCode != null) "split_code": splitCode,
-    if(subAccount != null) "subaccount": subAccount,
-    if(transactionCharge != null) "transaction_charge": transactionCharge,
-    if(bearer != null)  "bearer": bearer,
-  };
+        "email": email,
+        "amount": amount,
+        if (reference != null) "reference": reference,
+        if (currency != null && currency != "null") "currency": currency,
+        if (callbackUrl != null) "callback_url": callbackUrl,
+        if (plan != null) "plan": plan,
+        if (invoiceLimit != null) "invoice_limit": invoiceLimit,
+        if (channels != null) "channels": channels,
+        if (splitCode != null) "split_code": splitCode,
+        if (subAccount != null) "subaccount": subAccount,
+        if (transactionCharge != null) "transaction_charge": transactionCharge,
+        if (bearer != null && bearer != "null") "bearer": bearer,
+      };
 }

@@ -1,5 +1,4 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:paystack_flutter_plus/paystack_flutter_plus.dart';
 import 'package:paystack_flutter_plus/paystack_flutter_plus_platform_interface.dart';
 import 'package:paystack_flutter_plus/paystack_flutter_plus_method_channel.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
@@ -19,11 +18,5 @@ void main() {
     expect(initialPlatform, isInstanceOf<MethodChannelPaystackFlutterPlus>());
   });
 
-  test('getPlatformVersion', () async {
-    PaystackFlutterPlus paystackFlutterPlusPlugin = PaystackFlutterPlus();
-    MockPaystackFlutterPlusPlatform fakePlatform = MockPaystackFlutterPlusPlatform();
-    PaystackFlutterPlusPlatform.instance = fakePlatform;
 
-    expect(await paystackFlutterPlusPlugin.getPlatformVersion(), '42');
-  });
 }

@@ -101,9 +101,9 @@ class _PaymentPageState extends State<PaymentPage> {
       email: widget.email,
       amount: widget.amount.toInt(),
       reference: widget.reference,
-      currency: widget.currency.toString(),
-      channels: widget.paymentChannels?.map((e) => e.toString().toLowerCase()).toList(),
-      bearer: widget.bearer.toString().toLowerCase(),
+      currency: widget.currency?.toString().split('.').last,
+      channels: widget.paymentChannels?.map((e) => e.toString().split('.').last.toLowerCase()).toList(),
+      bearer: widget.bearer?.toString().split('.').last.toLowerCase(),
       callbackUrl: widget.callbackUrl,
       invoiceLimit: widget.invoiceLimit,
       plan: widget.plan,
@@ -111,7 +111,7 @@ class _PaymentPageState extends State<PaymentPage> {
       subAccount: widget.subAccount,
       transactionCharge: widget.transactionCharge,
     );
-    return await _transactionRepository.initializeTransaction(initializeTransactionRequest: request);
+    return await _transactionRepository.initializeTransaction(initializeTransactionRequest: request,secretKey: widget.secretKey);
   }
 
   initializeWebView() {
@@ -130,6 +130,16 @@ class _PaymentPageState extends State<PaymentPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.clear),
+          onPressed: () {
+            widget.onTransactionCancelled?.call();
+            Navigator.of(widget.context).pop();
+          },
+        ),
+        title: const Text('Paystack Payment'),
+      ),
       body: FutureBuilder<dartz.Either<String, InitializeTransactionResponse>>(
         future: _initializeTransactionFuture,
         builder: (context, snapshot) {

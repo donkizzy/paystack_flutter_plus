@@ -14,11 +14,12 @@ class TransactionRepository {
   }
 
   Future<Either<String, InitializeTransactionResponse>> initializeTransaction(
-      {required InitializeTransactionRequest initializeTransactionRequest}) async {
+      {required InitializeTransactionRequest initializeTransactionRequest, required String secretKey}) async {
     try {
       final response = await _networkProvider.call(
           path: ApiConfig.initializeTransaction,
           method: RequestMethod.post,
+          headers: {"Authorization": "Bearer $secretKey"},
           body: initializeTransactionRequest.toJson());
 
       if (response?.statusCode == 200 && response?.data != null && response?.data['status']) {

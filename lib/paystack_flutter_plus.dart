@@ -53,27 +53,29 @@ class PaystackFlutterPlus {
       Function? onTransactionCompleted,
       final Function? onTransactionCancelled,
       required final BuildContext context}) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-          builder: (context) => PaymentPage(
-                context: context,
-                secretKey: secretKey,
-                amount: amount,
-                email: email,
-                bearer: bearer,
-                callbackUrl: callbackUrl,
-                currency: currency,
-                invoiceLimit: invoiceLimit,
-                onTransactionCancelled: onTransactionCancelled,
-                onTransactionCompleted: onTransactionCompleted,
-                paymentChannels: paymentChannels,
-                plan: plan,
-                reference: reference,
-                splitCode: splitCode,
-                subAccount: subAccount,
-                transactionCharge: transactionCharge,
-              )),
-    );
+    showDialog(context: context, builder: (BuildContext context) {
+      return Dialog(
+        insetPadding: EdgeInsets.zero,
+        child: PaymentPage(
+          context: context,
+          secretKey: secretKey,
+          amount: amount,
+          email: email,
+          bearer: bearer,
+          callbackUrl: callbackUrl,
+          currency: currency,
+          invoiceLimit: invoiceLimit,
+          onTransactionCancelled: onTransactionCancelled,
+          onTransactionCompleted: onTransactionCompleted,
+          paymentChannels: paymentChannels,
+          plan: plan,
+          reference: reference,
+          splitCode: splitCode,
+          subAccount: subAccount,
+          transactionCharge: transactionCharge,
+        ),
+      );
+    },);
+
   }
 }
